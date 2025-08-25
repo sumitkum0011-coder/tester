@@ -63,7 +63,8 @@ function calculatePercent() {
 // Function to save transaction to the backend
 async function saveTransaction(expression, result) {
     try {
-        const response = await fetch('http://localhost:5001/api/transactions', {
+        const apiUrl = window.location.origin.includes('localhost') ? 'http://localhost:5001' : '';
+        const response = await fetch(`${apiUrl}/api/transactions`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -88,7 +89,8 @@ async function saveTransaction(expression, result) {
 // Function to fetch and display transaction history
 async function fetchTransactionHistory() {
     try {
-        const response = await fetch('http://localhost:5001/api/transactions');
+        const apiUrl = window.location.origin.includes('localhost') ? 'http://localhost:5001' : '';
+        const response = await fetch(`${apiUrl}/api/transactions`);
         
         if (!response.ok) {
             throw new Error('Failed to fetch transactions');
